@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./Assets/logo.svg";
+import "./App.css";
+import Header from "./Components/Header/Header";
+import TabButton from "./Components/TabButton/TabButton";
 
 function App() {
+  function handleSelect() {
+    console.log("Hello clicked");
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header logo={logo} />
+      <section>
+        <h2>Example</h2>
+        <menu>
+          <TabButton onSelect={handleSelect}>Components</TabButton>
+          <TabButton onSelect={handleSelect}>JSX</TabButton>
+          <TabButton onSelect={handleSelect}>Props</TabButton>
+          <TabButton onSelect={handleSelect}>States</TabButton>
+        </menu>
+      </section>
     </div>
   );
 }

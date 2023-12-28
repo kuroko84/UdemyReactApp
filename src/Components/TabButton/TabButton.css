@@ -1,0 +1,15 @@
+li {
+  list-style: none;
+}
+button {
+  border-radius: 5px;
+  background-color: #2fecec;
+  color: white;
+  margin: 10px;
+  height: 30px;
+  width: 90px;
+  border-style: none;
+}
+button:hover {
+  background-color: #25b3b3;
+}
