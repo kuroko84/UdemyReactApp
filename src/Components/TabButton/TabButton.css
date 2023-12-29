@@ -13,3 +13,9 @@ button {
 button:hover {
   background-color: #25b3b3;
 }
+/* menu button.active {
+  background-color: #000;
+} */
+button.active {
+  background-color: rgb(10, 169, 218);
+}
