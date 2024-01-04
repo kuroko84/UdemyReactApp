@@ -1,8 +1,17 @@
 import React from "react";
 import TabButton from "../TabButton/TabButton.jsx";
+import Section from "../Section/Section.jsx";
+import Tab from "../Tab/Tab.jsx";
 import { EXAMPLES } from "../../data.js";
 import { useState } from "react";
+import "./Example.css";
 
+/**
+ * Generates a function comment for the given function body.
+ *
+ * @param {type} selectedButton - The selected button.
+ * @return {type} The updated button content.
+ */
 const Example = () => {
   const [clickedButtonContent, setButtonContent] = useState("");
   function handleSelect(selectedButton) {
@@ -10,44 +19,54 @@ const Example = () => {
     setButtonContent(selectedButton);
     console.log(selectedButton);
   }
+  let tabcontent = <p>Please select a toppic</p>;
+
+  if (clickedButtonContent) {
+    tabcontent = (
+      <div id="tab-content" className="tab-content">
+        <h3>{EXAMPLES[clickedButtonContent].title}</h3>
+        <p>{EXAMPLES[clickedButtonContent].description}</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      <section>
-        <h2>Example</h2>
-        <menu>
-          <TabButton
-            isSelected={clickedButtonContent === "components"}
-            onSelect={() => handleSelect("components")}
-          >
-            Components
-          </TabButton>
-          <TabButton
-            isSelected={clickedButtonContent === "jsx"}
-            onSelect={() => handleSelect("jsx")}
-          >
-            JSX
-          </TabButton>
-          <TabButton
-            isSelected={clickedButtonContent === "props"}
-            onSelect={() => handleSelect("props")}
-          >
-            Props
-          </TabButton>
-          <TabButton
-            isSelected={clickedButtonContent === "state"}
-            onSelect={() => handleSelect("state")}
-          >
-            States
-          </TabButton>
-        </menu>
-        {!clickedButtonContent && <p>Please select a toppic</p>}
-        {clickedButtonContent && (
-          <div>
-            <h3>{EXAMPLES[clickedButtonContent].title}</h3>
-            <p>{EXAMPLES[clickedButtonContent].description}</p>
-          </div>
-        )}
-      </section>
+      <Section id="" title="Exemple">
+        <Tab
+          BtnContainer="menu"
+          buttons={
+            <>
+              <TabButton
+                isSelected={clickedButtonContent === "components"}
+                onClick={() => handleSelect("components")}
+              >
+                Components
+              </TabButton>
+              <TabButton
+                isSelected={clickedButtonContent === "jsx"}
+                onClick={() => handleSelect("jsx")}
+              >
+                JSX
+              </TabButton>
+              <TabButton
+                isSelected={clickedButtonContent === "props"}
+                onClick={() => handleSelect("props")}
+              >
+                Props
+              </TabButton>
+              <TabButton
+                isSelected={clickedButtonContent === "state"}
+                onClick={() => handleSelect("state")}
+              >
+                States
+              </TabButton>
+            </>
+          }
+        >
+          {tabcontent}
+        </Tab>
+      </Section>
     </>
   );
 };
