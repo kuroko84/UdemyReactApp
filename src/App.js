@@ -1,5 +1,6 @@
 // import logo from "./Assets/logo.svg";
 import "./App.css";
+import Player from "./Components/Player/Player";
 // import Header from "./Components/Header/Header";
 // import Example from "./Components/Example/Example.jsx";
 
@@ -14,14 +15,8 @@ function App() {
     <main>
       <div id="game-container">
         <ol id="players">
-          <li>
-            <span className="player-name">Player 1</span>
-            <span className="player-symbol">X</span>
-          </li>
-          <li>
-            <span className="player-name">Player 2</span>
-            <span className="player-symbol">O</span>
-          </li>
+          <Player symbol="X" name="Player 1"></Player>
+          <Player symbol="O" name="Player 2"></Player>
         </ol>
       </div>
     </main>
