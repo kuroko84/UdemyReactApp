@@ -5,19 +5,31 @@ import "./Player.css";
 /**
  * Creates a player component with the given name and symbol.
  *
- * @param {Object} name - the name of the player
- * @param {string} symbol - the symbol of the player
+ * @param {Object} props - the props object containing the name, symbol, and isActive
+ * @param {string} props.name - the name of the player
+ * @param {string} props.symbol - the symbol of the player
+ * @param {boolean} props.isActive - whether the player is active or not
  * @return {JSX.Element} a React component representing the player
  */
-const Player = ({ name, symbol }) => {
+const Player = ({ name, symbol, isActive }) => {
   const [playerName, setPlayerName] = React.useState(name);
   const [isEditing, setEditing] = React.useState(false);
+
+  // Handles the click event and toggles the editing state.
   function handleClick() {
     setEditing((isEditing) => !isEditing);
   }
+
+  /**
+   * Handles the change event and updates the player's name.
+   *
+   * @param {event} event - the event object
+   * @return {void}
+   */
   function handleChange(event) {
     setPlayerName(event.target.value);
   }
+
   let PlayerName = <span className="player-name">{playerName}</span>;
 
   if (isEditing) {
@@ -25,8 +37,9 @@ const Player = ({ name, symbol }) => {
       <input type="text" required value={playerName} onChange={handleChange} />
     );
   }
+
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {PlayerName}
         <span className="player-symbol">{symbol}</span>
