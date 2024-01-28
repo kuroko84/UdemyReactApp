@@ -11,13 +11,16 @@ import "./Player.css";
  * @param {boolean} props.isActive - whether the player is active or not
  * @return {JSX.Element} a React component representing the player
  */
-const Player = ({ name, symbol, isActive }) => {
+const Player = ({ name, symbol, isActive, onChangeName }) => {
   const [playerName, setPlayerName] = React.useState(name);
   const [isEditing, setEditing] = React.useState(false);
 
   // Handles the click event and toggles the editing state.
   function handleClick() {
     setEditing((isEditing) => !isEditing);
+    if (isEditing) {
+      onChangeName(symbol, playerName);
+    }
   }
 
   /**
