@@ -7,16 +7,24 @@ const initialBoardGame = [
   [null, null, null],
 ];
 
-const GameBoard = ({ onSelectSquare, activePlayerSymbol }) => {
-  const [gameBoard, setGameBoard] = React.useState(initialBoardGame);
-  function handleSelectButton(rowIndex, colIndex) {
-    setGameBoard((prevBoard) => {
-      const updatedBoard = [...prevBoard.map((innerArray) => [...innerArray])];
-      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-      return updatedBoard;
-    });
-    onSelectSquare();
+/**
+ * GameBoard component for displaying and interacting with the game board.
+ *
+ * @param {function} onSelectSquare - function to handle square selection
+ * @param {array} turns - array of turns taken in the game
+ * @return {JSX.Element} JSX element representing the game board
+ */
+const GameBoard = ({ onSelectSquare, turns }) => {
+  // Initialize the game board with the initial state
+  let gameBoard = initialBoardGame;
+  // Iterate through each turn and update the game board
+  for (const turn of turns) {
+    const { square, player } = turn;
+    // Update the game board based on the current turn
+    const { row, col } = square;
+    gameBoard[row][col] = player;
   }
+  // Render the game board with the updated state
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => (
@@ -24,7 +32,8 @@ const GameBoard = ({ onSelectSquare, activePlayerSymbol }) => {
           <ol>
             {row.map((psymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => handleSelectButton(rowIndex, colIndex)}>
+                {/* Render a button for each square on the game board */}
+                <button onClick={() => onSelectSquare(rowIndex, colIndex)}>
                   {psymbol}
                 </button>
               </li>
